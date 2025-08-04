@@ -2,6 +2,11 @@
 
 Hi! This is my Todo App. I made it so I can remember all the things I need to do, like homework, cleaning my room, or feeding my fish. 🐟
 
+## Techstacks used :
+HTML
+CSS 
+Javascript
+
 ## How to Use
 1. Type what you need to do in the box.
 2. Click the "Add" button and it will show up in the list.
