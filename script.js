@@ -1,0 +1,8 @@
+
+let f=document.getElementById('todo-form'),i=document.getElementById('todo-input'),l=document.getElementById('todo-list'),c=document.getElementById('clear-all');
+function s(){let t=[];l.querySelectorAll('li').forEach(e=>{t.push({text:e.querySelector('.todo-text').textContent,done:e.classList.contains('completed')})});localStorage.setItem('todos',JSON.stringify(t))}
+function a(t,d){let e=document.createElement('li');if(d)e.classList.add('completed');let b=document.createElement('input');b.type='checkbox';b.className='custom-checkbox';b.checked=!!d;b.onchange=()=>{e.classList.toggle('completed');s()};e.appendChild(b);let p=document.createElement('span');p.className='todo-text';p.textContent=t;p.ondblclick=()=>{let n=prompt('Edit your todo:',p.textContent);if(n!==null&&n.trim()!==''){p.textContent=n.trim();s()}};e.appendChild(p);let x=document.createElement('button');x.className='delete-btn';x.innerHTML='✕';x.onclick=y=>{y.stopPropagation();e.remove();s()};e.appendChild(x);l.appendChild(e);s()}
+f.onsubmit=u=>{u.preventDefault();if(i.value.trim()){a(i.value.trim());i.value=''}}
+c.onclick=()=>{l.innerHTML='';s()}
+(JSON.parse(localStorage.getItem('todos'))||[]).forEach(t=>a(t.text,t.done))
+document.getElementById('download-todos').onclick=function(){let t=[];l.querySelectorAll('li').forEach(e=>{let n=e.querySelector('.todo-text').textContent,o=e.classList.contains('completed')?'[x]':'[ ]';t.push(`${o} ${n}`)});let r=new Blob([t.join('\n')],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(r);a.download='todos.txt';a.click()}
